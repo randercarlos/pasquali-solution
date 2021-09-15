@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  pasquali-solution-db:
+    image: mysql:5.7
+    container_name: pasquali-solution-db
+    volumes:
+      - ./storage/docker/mysql:/var/lib/mysql
+    ports:
+      - 3308:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 96430409
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+  pasquali-solution-app:
+    image: ambientum/php:7.4-nginx
+    container_name: pasquali-solution-app
+    depends_on:
+      - pasquali-solution-db
+    ports:
+      - 8000:8080
+    volumes:
+      - .:/var/www/app
+
+
