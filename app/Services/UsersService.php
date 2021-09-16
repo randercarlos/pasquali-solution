@@ -15,6 +15,11 @@ class UsersService extends AbstractService
         $this->model = new User();
     }
 
+    public function loadAll($recordsPerPage = false) {
+        return User::with('employee')->get();
+    }
+
+
     public function save(array $data, Model $model = null): Model {
 
         if (!empty($data['password'])) {

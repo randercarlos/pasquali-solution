@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\AuthenticationException;
 
 class AuthService
 {
     public function login($credentials) {
         if (!$token = auth()->attempt($credentials)) {
-            abort(401, 'Invalid credentials.');
+            throw new AuthenticationException('Invalid credentials.');
         }
 
         return $this->respondWithToken($token);

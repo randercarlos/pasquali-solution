@@ -11,4 +11,8 @@ class EmployeesSalariesHistoricService extends AbstractService
     public function __construct() {
         $this->model = new EmployeeSalaryHistoric();
     }
+
+    public function loadByEmployeeId($employeeId) {
+        return EmployeeSalaryHistoric::where('employee_id', $employeeId)->get();
+    }
 }

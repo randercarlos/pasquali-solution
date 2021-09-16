@@ -11,4 +11,8 @@ class EmployeesService extends AbstractService
     public function __construct() {
         $this->model = new Employee();
     }
+
+    public function getAll() {
+        return Employee::with(['user', 'currentSalary', 'address'])->get();
+    }
 }
