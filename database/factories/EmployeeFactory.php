@@ -1,17 +1,17 @@
 <?php
 
-use App\Models\Recruiter;
+use App\Models\Employee;
 use Faker\Generator as Faker;
 use Illuminate\Support\Arr;
 use App\Models\User;
 
-$factory->define(Recruiter::class, function (Faker $faker) {
+$factory->define(Employee::class, function (Faker $faker) {
     return [
         'name' => $faker->userName,
         'birth' => today()->subYears(Arr::random(range(20, 60))),
         'cpf' => $faker->cpf,
-        'company' => $faker->company,
-        'address' => $faker->address,
-        'user_id' => factory(User::class)
+        'rg' => $faker->rg,
+        'email' => $faker->email,
+        'user_id' => $faker->unique()->numberBetween(1, 5)
     ];
 });
