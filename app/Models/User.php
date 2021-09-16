@@ -14,7 +14,6 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'username', 'email', 'password',
     ];
-
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -22,8 +21,8 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public function recruiter() {
-        return $this->hasOne(Recruiter::class);
+    public function employee() {
+        return $this->hasOne(Employee::class);
     }
 
     public function getJWTIdentifier()
