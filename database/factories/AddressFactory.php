@@ -8,7 +8,7 @@ $factory->define(Address::class, function (Faker $faker) {
     static $i = 1;
 
     return [
-        'address' => $faker->streetName,
+        'place' => $faker->streetName,
         'number' => Arr::random(range(1, 1000)),
         'city' =>  $faker->city,
         'state' =>  $faker->stateAbbr,
