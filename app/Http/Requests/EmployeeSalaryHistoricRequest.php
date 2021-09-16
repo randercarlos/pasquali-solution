@@ -24,12 +24,8 @@ class EmployeeSalaryHistoricRequest extends FormRequest
     public function rules()
     {
         return [
-            'address' => ['required', 'min:5', 'max:200'],
-            'number' => ['required', 'min:1', 'max:15'],
-            'city' => ['required', 'min:3', 'max:30'],
-            'state' => ['required', 'size:2'],
-            'postalCode' => ['required', 'size:8'],
-            'employee_id'  => ['required', 'integer', 'exists:employees'],
+            'salary' => ['required', 'numeric', 'min:0', 'max:20000'],
+            'employee_id'  => ['required', 'integer', 'exists:employees,id'],
         ];
     }
 }

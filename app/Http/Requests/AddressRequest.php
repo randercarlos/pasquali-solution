@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AddressRequest extends FormRequest
 {
@@ -24,12 +25,12 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'address' => ['required', 'min:5', 'max:200'],
+            'place' => ['required', 'min:5', 'max:200'],
             'number' => ['required', 'min:1', 'max:15'],
             'city' => ['required', 'min:3', 'max:30'],
             'state' => ['required', 'size:2'],
-            'postalCode' => ['required', 'size:8'],
-            'employee_id'  => ['required', 'integer', 'exists:employees'],
+            'postalCode' => ['required', 'size:9'],
+            'employee_id'  => ['required', 'integer', 'exists:employees,id'],
         ];
     }
 }

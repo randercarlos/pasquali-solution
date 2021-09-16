@@ -26,11 +26,11 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:100'],
-            'cpf' => ['required', 'cpf', 'formato_cpf'],
+            'cpf' => ['required', 'cpf'],
             'rg' => ['required', 'min:12', 'max:12'], //21.275.738-4
             'birth' => ['required', 'date'],
             'email' => ['required', 'email'],
-            'user_id'  => ['required', 'integer', 'exists:users'],
+            'user_id'  => ['required', 'integer', 'exists:users,id'],
         ];
     }
 }
