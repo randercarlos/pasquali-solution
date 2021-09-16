@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Recruiter;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -26,10 +27,10 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:100'],
-            'cpf' => ['required', 'cpf'],
+            'cpf' => ['required', 'cpf', Rule::unique('employees', 'cpf')->ignore(optional($this->employee)->id)],
             'rg' => ['required', 'min:12', 'max:12'], //21.275.738-4
             'birth' => ['required', 'date'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', Rule::unique('employees', 'email')->ignore(optional($this->employee)->id)],
             'user_id'  => ['required', 'integer', 'exists:users,id'],
         ];
     }
