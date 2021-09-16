@@ -84,7 +84,7 @@ return [
     ],
     'string'               => 'O campo :attribute deve ser uma string!',
     'timezone'             => 'O campo :attribute deve ser uma zona válida!',
-    'unique'               => 'Já existe um usuário com o email informado!',
+    'unique'               => 'Já existe um usuário com o :attribute informado!',
     'uploaded'             => 'O campo :attribute falha no upload!',
     'url'                  => 'O campo :attribute deve ter uma URL válida!',
 
@@ -144,33 +144,6 @@ return [
         'brand_id' => 'Marca',
         'group_id' => 'Grupo',
         'photo' => 'Foto',
-
-
-        'plate_num' => 'Placa',
-        'plate' => 'Final da Placa',
-        'obs' => 'Observação',
-        'year' => 'Ano',
-        'price' => 'Preço',
-        'is_state' => 'Estado do Carro',
-        'is_negotiable' => 'Tipo de Negociação',
-        'is_visitable' => 'Pode ser visitado',
-        'is_featured' => 'Em destaque',
-        'is_top' => 'No topo',
-        'is_offer' => 'Em oferta',
-        'km' => 'Kilometragem',
-        'ports' => 'Número de Portas',
-        'url' => 'Endereço do Site',
-        'seo_description' => 'Descrição breve (SEO)',
-        'seo_keys' => 'Palavras-chave (SEO)',
-        'version_id' => 'Versão',
-        'brand_id' => 'Marca',
-        'model_id' => 'Modelo',
-        'color_id' => 'Cor',
-        'gearbox_id' => 'Câmbio',
-        'fuel_id' => 'Combustível',
-        'documentation_id' => 'Documentação',
-        'need_id' => 'Necessidade',
-        'bodywork_id' => 'Carroceria'
     ],
 
 ];
