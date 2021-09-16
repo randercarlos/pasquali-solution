@@ -18,12 +18,16 @@ class Employee extends Model
         return $this->hasOne(Address::class);
     }
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     public function salariesHistory() {
         return $this->hasMany(EmployeeSalaryHistoric::class);
     }
 
     public function currentSalary() {
-        return $this->hasMany(EmployeeSalaryHistoric::class)->latest();
+        return $this->hasOne(EmployeeSalaryHistoric::class)->latest();
     }
 
     protected function serializeDate(\DateTimeInterface $date)
