@@ -1,5 +1,5 @@
 <h4 align="center">
-  🚀 Backend Careers - API Resful para Listagem de Vagas de Emprego - Teste técnico
+  🚀 Pasquali Solution - API Resful para gerenciamento de colaboradores com opção de histórico referente ao salário - Teste técnico
 </h4>
 
 <p align="center">
@@ -30,12 +30,12 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-Esse projeto é uma API Restful desenvolvida como teste técnico para o processo seletivo de Desenvolvedor Backend na Talentify.
+Esse projeto é uma API Restful desenvolvida como teste técnico para o processo seletivo de Desenvolvedor fullstack na Pasquali Solution.
 
 
 ## 💻 Funcionalidades
 
-O sistema possui cadastros/listagem/exibição/alteração/paginação e restrição de alteração de vagas de emprego assim como autenticação em JWT. A infraestrutura é toda configurada pelo docker/docker-compose.
+O sistema possui cadastros/listagem/exibição/alteração de colaboradores, endereços e histórico de salários assim como autenticação em JWT. A infraestrutura é toda configurada pelo docker/docker-compose.
 
 ## 📄 Requisitos
 
@@ -70,12 +70,12 @@ docker-compose up
 - Após isso, execute o comando abaixo para instalar as dependências do laravel.
 
 ```sh
-docker-compose exec backend-careers-app composer install
+docker-compose exec pasquali-solution-app composer install
 ```
 - Aguarde até que todas as dependências do laravel estejam instaladas. Após isso, rode o comando abaixo para instalar as migrações e os seeds:
 
 ```sh
-docker-compose exec backend-careers-app php artisan migrate --seed
+docker-compose exec pasquali-solution-app php artisan migrate --seed
 ``` 
 
 - Após rodar o comando acima, o sistema já estará pronto e acessível em [http://localhost:8000](http://localhost:8000).  
@@ -84,7 +84,7 @@ docker-compose exec backend-careers-app php artisan migrate --seed
 
 ## 📝 Documentação
 
-- [Insomnia Endpoints Collection](backend-careers-endpoints-insomnia.json) (Para importar, clique no menu "Application" => Preferences => Data => Clique em "Import Data" => "From File" => selecione o arquivo e clique em "Import")
+- [Insomnia Endpoints Collection](pasquali-solution-endpoints-insomnia.json) (Para importar, clique no menu "Application" => Preferences => Data => Clique em "Import Data" => "From File" => selecione o arquivo e clique em "Import")
 
 - Para acessar os endpoints, é necessário se autenticar no sistema. Para isso, use a rota login dentro da pasta auth no  
 Imsomnia informando os campos email e a password. Use qualquer email gerado pelo seeder na tabela users do banco de dados. 
