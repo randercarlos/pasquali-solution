@@ -14,9 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
-//        $this->call(UserSeeder::class);
-        $this->call(RecruiterSeeder::class);
-        $this->call(JobSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(EmployeeSeeder::class);
+        $this->call(AddressSeeder::class);
+        $this->call(EmployeeSalaryHistoricSeeder::class);
 
         Schema::enableForeignKeyConstraints();
     }

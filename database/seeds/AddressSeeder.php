@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Job;
+use App\Models\Address;
 
-class JobSeeder extends Seeder
+class AddressSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class JobSeeder extends Seeder
      */
     public function run()
     {
-        factory(Job::class, 50)->create();
+        factory(Address::class, 5)->create();
     }
 }
