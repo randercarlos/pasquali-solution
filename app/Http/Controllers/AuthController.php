@@ -17,22 +17,22 @@ class AuthController extends Controller
 
     public function login(Request $request): JsonResponse
     {
-        return response()->json($data = $this->authService->login($request), Arr::exists($data, 'msg') ? 401 : 200);
+        return response()->success($this->authService->login($request->only(['email', 'password'])));
     }
 
     public function logout(): JsonResponse
     {
-        return response()->json($this->authService->logout());
+        return response()->success($this->authService->logout());
     }
 
     public function refreshToken(): JsonResponse
     {
-        return response()->json($this->authService->refreshToken());
+        return response()->success($this->authService->refreshToken());
     }
 
-    public function loggedUser(): JsonResponse
+    public function me(): JsonResponse
     {
-        return response()->json($this->authService->loggedUser());
+        return response()->success($this->authService->me());
     }
 
 
