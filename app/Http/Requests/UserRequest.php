@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Job;
+use App\Models\Address;
 use App\Models\Recruiter;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class JobFormRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,13 +27,9 @@ class JobFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:100'],
-            'description' => ['required', 'max:1000'],
-            'status' => ['required', Rule::in(['open', 'progress', 'close']),],
-            'address' => ['required', 'max:250'],
-            'salary' => ['required', 'numeric', 'min:0'],
-            'company' => ['required', 'max:60'],
-            'recruiter_id' => ['required', 'exists:' . Recruiter::class . ',id']
+            'username' => ['required', 'alpha_num', 'min:3', 'max:30'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:5', 'max:20', 'confirmed'],
         ];
     }
 }
