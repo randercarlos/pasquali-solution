@@ -7,11 +7,9 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class AuthService
 {
-    public function login(Request $request) {
-        $credentials = $request->only(['email', 'password']);
-
+    public function login($credentials) {
         if (!$token = auth()->attempt($credentials)) {
-            return ['msg' => 'Invalid email or password!'];
+            abort(401, 'Invalid credentials.');
         }
 
         return $this->respondWithToken($token);
@@ -27,7 +25,7 @@ class AuthService
         return $this->respondWithToken(auth()->refresh());
     }
 
-    public function loggedUser(): Authenticatable {
+    public function me(): Authenticatable {
         return auth()->user();
     }
 
