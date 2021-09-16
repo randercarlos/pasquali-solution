@@ -38,23 +38,28 @@ class AuthFeatureTest extends TestCase
     {
         $this->createUser();
 
-        $response = $this->post('/api/v1/auth/login', [
+        $response = $this->postJson('/api/v1/auth/login', [
             'email' => 'admin@admin.com',
             'password' => 'admin'
         ]);
 
+        $this->assertAuthenticated();
+
         $response
             ->assertOk()
             ->assertJsonStructure([
-                'access_token', 'token_type', 'expires_in'
+                'data' => [
+                    'access_token', 'token_type', 'expires_in'
+                ]
             ]);
+
     }
 
     public function test_it_cant_authenticate_with_invalid_email_or_password()
     {
-        $this->createUser();
+//        $this->createUser();
 
-        $response = $this->post('/api/v1/auth/login', [
+        $response = $this->postJson('/api/v1/auth/login', [
             'email' => 'testando@testando.com',
             'password' => 'não_existe'
         ]);
@@ -65,62 +70,69 @@ class AuthFeatureTest extends TestCase
 
     public function test_it_can_logout()
     {
-        $response = $this->post('/api/v1/auth/logout', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->postJson('/api/v1/auth/logout', [], ['Authorization' => 'Bearer ' . $this->token]);
 
         $response
+            ->dump()
             ->assertOk()
             ->assertJsonStructure([
-                'msg'
+                'data' => [
+                    'msg'
+                ]
             ]);
     }
 
     public function test_it_cant_logout_without_authorization_bearer()
     {
-        $response = $this->post('/api/v1/auth/logout');
+        $response = $this->postJson('/api/v1/auth/logout');
 
         $response->assertStatus(401);
     }
 
     public function test_it_can_refresh_token()
     {
-        $response = $this->post('/api/v1/auth/refresh-token', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->postJson('/api/v1/auth/refresh-token', [], ['Authorization' => 'Bearer ' . $this->token]);
 
         $response
             ->assertOk()
             ->assertJsonStructure([
-                'access_token',
-                'token_type',
-                'expires_in'
+                'data' => [
+                    'access_token', 'token_type', 'expires_in'
+                ]
             ]);
     }
 
 
     public function test_it_cant_refresh_token_without_authorization_bearer()
     {
-        $response = $this->post('/api/v1/auth/refresh-token');
+        $response = $this->postJson('/api/v1/auth/refresh-token');
 
         $response->assertStatus(401);
     }
 
     public function test_it_can_return_logged_user()
     {
-        $response = $this->post('/api/v1/auth/logged-user', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->postJson('/api/v1/auth/me', [], ['Authorization' => 'Bearer ' . $this->token]);
 
         $response
             ->assertOk()
             ->assertJsonStructure([
-                'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at'
+                'data' => [
+                    'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at'
+                ]
             ]);
     }
 
     public function test_it_cant_return_logged_user_without_authorization_bearer()
     {
-        $response = $this->post('/api/v1/auth/logged-user', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->postJson('/api/v1/auth/me', [], ['Authorization' => 'Bearer ' . $this->token]);
 
         $response
             ->assertOk()
             ->assertJsonStructure([
-                'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at'
+                'data' => [
+                    'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at'
+                ]
             ]);
     }
 
