@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return response()->json(['msg' => "It's working."]);
+});
+
 Route::group(['prefix' => 'v1'], function () {
     Route::post('auth/login', 'AuthController@login')->name('login');
 
