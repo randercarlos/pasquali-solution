@@ -18,3 +18,10 @@ Route::group(['prefix' => 'v1'], function () {
         Route::apiResource('employees.salaries', 'EmployeesSalariesHistoricController')->only(['index', 'store', 'destroy']);
     });
 });
+
+Route::fallback(function() {
+    return response()->json([
+        'error' => 'Endpoint ' . url()->current() . ' not found!'
+    ], 404);
+});
+
