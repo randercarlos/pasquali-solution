@@ -46,7 +46,7 @@ O sistema possui cadastros/listagem/exibição/alteração de colaboradores, end
 
 **Windows, OS X & Linux:**
 
-Baixe o arquivo zip e o descompacte ou baixe o projeto para sua máquina através do git clone [https://github.com/randercarlos/pasquali-solution.git](https://github.com/randercarlos/pasquali-solution.git)
+Baixe o arquivo zip e o descompacte ou baixe o projeto para sua máquina através do git clone [https://github.com/randercarlos/backend-careers.git](https://github.com/randercarlos/backend-careers.git)
 
 
 - Entre no prompt de comando e vá até a pasta do projeto:
@@ -91,4 +91,4 @@ Imsomnia informando os campos email e a password. Use qualquer email gerado pelo
 O password padrão para todos os usuário é *teste*. Acione o endpoint. Se email e password estiverem corretos, use o token gerado no campo
 "access_token" como Bearer Token para acessar os endpoints do sistema.
 
-Desenvolvido por Rander Carlos :wave: [Linkedin!](https://www.linkedin.com/in/rander-carlos-308a63a8/)
+Desenvolvido por Rander Carlos :wave: [Linkedin!](https://www.linkedin.com/in/rander-carlos-caetano-freitas-308a63a8/)
