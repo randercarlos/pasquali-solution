@@ -70,8 +70,8 @@ jobs:
             sudo docker-compose exec -T pasquali-solution-app php artisan route:cache
             sudo docker-compose exec -T pasquali-solution-app php artisan view:cache
             sudo docker-compose exec -T pasquali-solution-app php artisan event:cache
-            sudo docker-compose exec -T pasquali-solution-app php artisan key:generate
-            sudo docker-compose exec -T pasquali-solution-app php artisan jwt:secret
+            sudo docker-compose exec -T pasquali-solution-app php artisan key:generate --force
+            sudo docker-compose exec -T pasquali-solution-app php artisan jwt:secret --force
             sudo docker-compose exec -T pasquali-solution-app php artisan storage:link
             sudo docker-compose exec -T pasquali-solution-app php artisan optimize
             sudo docker-compose exec -T pasquali-solution-app php artisan migrate --force
