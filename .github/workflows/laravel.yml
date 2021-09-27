@@ -42,7 +42,7 @@ jobs:
           ref: main
 
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main:v2.2.11
+        uses: easingthemes/ssh-deploy@v2.2.11
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rltgoDzvO --exclude .git --exclude docker/mysql --exclude .github"
@@ -64,16 +64,16 @@ jobs:
             sudo docker-compose exec php artisan down
             sudo rm -rf vendor
             sudo docker-compose exec pasquali-solution-app composer install --no-dev --no-interaction --optimize-autoloader
-            sudo docker-compose exec php artisan config:cache
-            sudo docker-compose exec php artisan route:cache
-            sudo docker-compose exec php artisan view:cache
-            sudo docker-compose exec php artisan event:cache
-            sudo docker-compose exec php artisan key:generate
-            sudo docker-compose exec php artisan jwt:secret
-            sudo docker-compose exec php artisan storage:link
-            sudo docker-compose exec php artisan optimize
-            sudo docker-compose exec php artisan migrate --force
-            sudo docker-compose exec php artisan up
+            sudo docker-compose exec pasquali-solution-app php artisan config:cache
+            sudo docker-compose exec pasquali-solution-app php artisan route:cache
+            sudo docker-compose exec pasquali-solution-app php artisan view:cache
+            sudo docker-compose exec pasquali-solution-app php artisan event:cache
+            sudo docker-compose exec pasquali-solution-app php artisan key:generate
+            sudo docker-compose exec pasquali-solution-app php artisan jwt:secret
+            sudo docker-compose exec pasquali-solution-app php artisan storage:link
+            sudo docker-compose exec pasquali-solution-app php artisan optimize
+            sudo docker-compose exec pasquali-solution-app php artisan migrate --force
+            sudo docker-compose exec pasquali-solution-app php artisan up
 
 
 
