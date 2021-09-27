@@ -58,23 +58,25 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            echo "Starting deploy"
             cd ${{ secrets.REMOTE_TARGET }}
             sudo service apache2 stop
             sudo docker-compose up -d
-            sudo docker-compose exec php artisan optimize:clear
-            sudo docker-compose exec php artisan down
+            sudo docker-compose exec -T php artisan optimize:clear
+            sudo docker-compose exec -T php artisan down
             sudo rm -rf vendor
-            sudo docker-compose exec pasquali-solution-app composer install --no-dev --no-interaction --optimize-autoloader
-            sudo docker-compose exec pasquali-solution-app php artisan config:cache
-            sudo docker-compose exec pasquali-solution-app php artisan route:cache
-            sudo docker-compose exec pasquali-solution-app php artisan view:cache
-            sudo docker-compose exec pasquali-solution-app php artisan event:cache
-            sudo docker-compose exec pasquali-solution-app php artisan key:generate
-            sudo docker-compose exec pasquali-solution-app php artisan jwt:secret
-            sudo docker-compose exec pasquali-solution-app php artisan storage:link
-            sudo docker-compose exec pasquali-solution-app php artisan optimize
-            sudo docker-compose exec pasquali-solution-app php artisan migrate --force
-            sudo docker-compose exec pasquali-solution-app php artisan up
+            sudo docker-compose exec -T pasquali-solution-app composer install --no-dev --no-interaction --optimize-autoloader
+            sudo docker-compose exec -T pasquali-solution-app php artisan config:cache
+            sudo docker-compose exec -T pasquali-solution-app php artisan route:cache
+            sudo docker-compose exec -T pasquali-solution-app php artisan view:cache
+            sudo docker-compose exec -T pasquali-solution-app php artisan event:cache
+            sudo docker-compose exec -T pasquali-solution-app php artisan key:generate
+            sudo docker-compose exec -T pasquali-solution-app php artisan jwt:secret
+            sudo docker-compose exec -T pasquali-solution-app php artisan storage:link
+            sudo docker-compose exec -T pasquali-solution-app php artisan optimize
+            sudo docker-compose exec -T pasquali-solution-app php artisan migrate --force
+            sudo docker-compose exec -T pasquali-solution-app php artisan up
+            echo "Deploy successfuly"
 
 
 
