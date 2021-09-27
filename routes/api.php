@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1'], function () {
+    Route::get('/', 'HealthCheckController');
+
     Route::post('auth/login', 'AuthController@login')->name('login');
 
     Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
