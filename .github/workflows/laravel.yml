@@ -58,6 +58,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            cd ${{ secrets.REMOTE_TARGET }}
             sudo service apache2 stop
             sudo docker-compose up -d
             sudo docker-compose exec php artisan optimize:clear
