@@ -8,9 +8,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('auth/login', 'AuthController@login')->name('login');
 
     Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
+        Route::get('me', 'AuthController@me')->name('me');
         Route::post('logout', 'AuthController@logout')->name('logout');
         Route::post('refresh-token', 'AuthController@refreshToken')->name('refreshToken');
-        Route::post('me', 'AuthController@me')->name('me');
     });
 
     Route::middleware('auth:api')->group(function () {
