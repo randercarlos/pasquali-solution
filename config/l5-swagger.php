@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'Swagger UI - Pasquali Solution - API Resful para gerenciamento de colaboradores',
             ],
 
             'routes' => [
