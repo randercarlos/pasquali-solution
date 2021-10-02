@@ -1,36 +1,2330 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Documentação da API Restful para um sistema de futebol de Salão",
-        "description": "Implmentação da documentação",
+        "title": "Pasquali Solution - Gerenciamento de Colaboradores - Referência da API",
+        "description": "Documentação dos endpoint disponíveis na API Restful",
         "contact": {
-            "email": "admin@admin.com"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "email": "randerccf@gmail.com"
         },
         "version": "1.0.0"
     },
     "servers": [
         {
-            "url": "http://localhost/api/v1",
-            "description": "API Restful Soccer"
+            "url": "http://localhost:8000/api/v1",
+            "description": "Desenvolvimento(localhost)"
+        },
+        {
+            "url": "https://api.testandoapi.click/api/v1",
+            "description": "Produção"
         }
     ],
     "paths": {
-        "/players": {
+        "/employees/{id}/address": {
             "get": {
                 "tags": [
-                    "ranking"
+                    "Endereços do Funcionário"
                 ],
-                "summary": "Add a new pet to the store",
-                "operationId": "rankingPlayers",
+                "summary": "Listar Endereços do Funcionário",
+                "description": "Retorna a listagem de endereços do funcionários",
+                "operationId": "b4924c052d494d567fff1916567e078a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Success"
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Address"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Endereços do Funcionário"
+                ],
+                "summary": "Criar Endereço do Funcionário",
+                "description": "Cria um novo endereço do funcionário",
+                "operationId": "793819b8fbdfd4cd0c3574c99bc4b737",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "place",
+                                    "number",
+                                    "city",
+                                    "state",
+                                    "postalCode",
+                                    "employee_id"
+                                ],
+                                "properties": {
+                                    "place": {
+                                        "type": "string",
+                                        "example": "Rua Maldonado"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "694"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Dourados"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "example": "MT"
+                                    },
+                                    "postalCode": {
+                                        "type": "string",
+                                        "example": "67500-425"
+                                    },
+                                    "employee_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "required": [
+                                                "place",
+                                                "number",
+                                                "city",
+                                                "state",
+                                                "postalCode",
+                                                "employee_id"
+                                            ],
+                                            "properties": {
+                                                "place": {
+                                                    "type": "string",
+                                                    "example": "O campo place é obrigatório!"
+                                                },
+                                                "number": {
+                                                    "type": "string",
+                                                    "example": "O campo Número é obrigatório!"
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": "O campo city é obrigatório!"
+                                                },
+                                                "state": {
+                                                    "type": "string",
+                                                    "example": "O campo state é obrigatório!"
+                                                },
+                                                "postalCode": {
+                                                    "type": "string",
+                                                    "example": "O campo postal code é obrigatório!"
+                                                },
+                                                "employee_id": {
+                                                    "type": "integer",
+                                                    "example": "O campo employee id é obrigatório!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/employees/{id}/address/{addressId}": {
+            "get": {
+                "tags": [
+                    "Endereços do Funcionário"
+                ],
+                "summary": "Obter Endereço do Funcionário",
+                "description": "Retorna o endereço por id do funcionário",
+                "operationId": "5724a76dd05257cd988a5e2c08fabce5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    },
+                    {
+                        "name": "addressId",
+                        "in": "path",
+                        "description": "id do endereço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Endereços do Funcionário"
+                ],
+                "summary": "Atualizar Endereço do Funcionário",
+                "description": "Atualiza o endereço do funcionário",
+                "operationId": "878f5a2e080a21d947f6caa858b9745d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    },
+                    {
+                        "name": "addressId",
+                        "in": "path",
+                        "description": "id do endereço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "place",
+                                    "number",
+                                    "city",
+                                    "state",
+                                    "postalCode",
+                                    "employee_id"
+                                ],
+                                "properties": {
+                                    "place": {
+                                        "type": "string",
+                                        "example": "Rua Maldonado"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "694"
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "example": "Dourados"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "example": "MT"
+                                    },
+                                    "postalCode": {
+                                        "type": "string",
+                                        "example": "67500-425"
+                                    },
+                                    "employee_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Address"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "required": [
+                                                "place",
+                                                "number",
+                                                "city",
+                                                "state",
+                                                "postalCode",
+                                                "employee_id"
+                                            ],
+                                            "properties": {
+                                                "place": {
+                                                    "type": "string",
+                                                    "example": "O campo place é obrigatório!"
+                                                },
+                                                "number": {
+                                                    "type": "string",
+                                                    "example": "O campo Número é obrigatório!"
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": "O campo city é obrigatório!"
+                                                },
+                                                "state": {
+                                                    "type": "string",
+                                                    "example": "O campo state é obrigatório!"
+                                                },
+                                                "postalCode": {
+                                                    "type": "string",
+                                                    "example": "O campo postal code é obrigatório!"
+                                                },
+                                                "employee_id": {
+                                                    "type": "integer",
+                                                    "example": "O campo employee id é obrigatório!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Endereços do Funcionário"
+                ],
+                "summary": "Deletar Endereço do Funcionário",
+                "description": "Deleta um endereço do funcionário",
+                "operationId": "95cd6b6e0b44136bcaeae1b5dff8435f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    },
+                    {
+                        "name": "addressId",
+                        "in": "path",
+                        "description": "id do endereço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Logar Usuário",
+                "description": "Autentica o usuário com as credenciais informadas.",
+                "operationId": "8cb7742ae98d0990acb2907c4e00bf24",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email do usuário",
+                                        "type": "string",
+                                        "example": "email@example.com.br"
+                                    },
+                                    "password": {
+                                        "description": "Senha do usuário",
+                                        "type": "string",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC92MVwvYXV0aFwvbG9naW4iLCJpYXQiOjE2MzI4NjA5NDcsImV4cCI6MTYzMjg2NDU0NywibmJmIjoxNjMyODYwOTQ3LCJqdGkiOiIzaGhCQWdKMVRJS1NFeXpkIiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJk"
+                                                },
+                                                "token_type": {
+                                                    "type": "string",
+                                                    "example": "bearer"
+                                                },
+                                                "expires_in": {
+                                                    "type": "string",
+                                                    "example": "3600"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
+            }
+        },
+        "/auth/me": {
+            "get": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Usuário Autenticado",
+                "description": "Retorna os dados do usuário logado",
+                "operationId": "a9c495788506b114956e3f509e5d90a2",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh-token": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Atualizar Token",
+                "description": "Atualiza o token do usuário logado",
+                "operationId": "f63bd8623627d4788e5207877d1c582d",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC92MVwvYXV0aFwvbG9naW4iLCJpYXQiOjE2MzI4NjA5NDcsImV4cCI6MTYzMjg2NDU0NywibmJmIjoxNjMyODYwOTQ3LCJqdGkiOiIzaGhCQWdKMVRJS1NFeXpkIiwic3ViIjoyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJk"
+                                                },
+                                                "token_type": {
+                                                    "type": "string",
+                                                    "example": "bearer"
+                                                },
+                                                "expires_in": {
+                                                    "type": "string",
+                                                    "example": "3600"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Deslogar Usuário",
+                "description": "Desautentica o usuário logado",
+                "operationId": "0d29c740dc06d77602af8095bf4654cc",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "msg": {
+                                                    "type": "string",
+                                                    "example": "Successfully logged out!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/employees": {
+            "get": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Listar Funcionários",
+                "description": "Retorna a listagem de funcionários",
+                "operationId": "4ce10d6079cc41f54345115536e6d623",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Employee"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Criar Funcionário",
+                "description": "Cria um novo funcionário",
+                "operationId": "11023790e5966928fb2d32057cab63a9",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "cpf",
+                                    "rg",
+                                    "birth",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Alexandre da Silva"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "123.456-78"
+                                    },
+                                    "rg": {
+                                        "type": "string",
+                                        "example": "22.289.456-7"
+                                    },
+                                    "birth": {
+                                        "type": "datetime",
+                                        "example": "1981-09-16"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "teste@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Employee"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "O campo name é obrigatório!"
+                                                },
+                                                "cpf": {
+                                                    "type": "string",
+                                                    "example": "O campo cpf é obrigatório!"
+                                                },
+                                                "rg": {
+                                                    "type": "string",
+                                                    "example": "O campo rg é obrigatório!"
+                                                },
+                                                "birth": {
+                                                    "type": "string",
+                                                    "example": "O campo birth é obrigatório!"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "O campo email é obrigatório!"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "O campo user_id é obrigatório!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/employees/{id}": {
+            "get": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Obter Funcionário",
+                "description": "Retorna o funcionário pelo id",
+                "operationId": "ca1383eba1e3dcbb82733e5d926079ab",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Employee"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Atualizar Funcionário",
+                "description": "Atualiza um funcionário existente",
+                "operationId": "96154b9e3149733be44bb2e071cfabba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "cpf",
+                                    "rg",
+                                    "birth",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Alexandre da Silva"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "123.456-78"
+                                    },
+                                    "rg": {
+                                        "type": "string",
+                                        "example": "22.289.456-7"
+                                    },
+                                    "birth": {
+                                        "type": "datetime",
+                                        "example": "1981-09-16"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "teste@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Employee"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "O campo name é obrigatório!"
+                                                },
+                                                "cpf": {
+                                                    "type": "string",
+                                                    "example": "O campo cpf é obrigatório!"
+                                                },
+                                                "rg": {
+                                                    "type": "string",
+                                                    "example": "O campo rg é obrigatório!"
+                                                },
+                                                "birth": {
+                                                    "type": "string",
+                                                    "example": "O campo birth é obrigatório!"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "O campo email é obrigatório!"
+                                                },
+                                                "user_id": {
+                                                    "type": "string",
+                                                    "example": "O campo user_id é obrigatório!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Deletar Funcionário",
+                "description": "Deleta um funcionário existente",
+                "operationId": "b480eaa69c63b4aeb3ea894386e353d8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/employees/{id}/salaries": {
+            "get": {
+                "tags": [
+                    "Histórico de Salários do Funcionário"
+                ],
+                "summary": "Listar Salários do Histórico do Funcionário",
+                "description": "Retorna a listagem do histórico de salários do funcionários",
+                "operationId": "97aca71d7cbff2c38f9232531280903d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/EmployeeSalaryHistoric"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Histórico de Salários do Funcionário"
+                ],
+                "summary": "Criar Salário no Histórico do Funcionário",
+                "description": "Cria um novo salário no histórico do funcionário",
+                "operationId": "873e797045fe843053a40ac3207257fd",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "salary",
+                                    "employee_id"
+                                ],
+                                "properties": {
+                                    "salary": {
+                                        "type": "number",
+                                        "example": "2344.65"
+                                    },
+                                    "employee_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/EmployeeSalaryHistoric"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "required": [
+                                                "salary",
+                                                "employee_id"
+                                            ],
+                                            "properties": {
+                                                "salary": {
+                                                    "type": "number",
+                                                    "example": "O campo salary é obrigatório!"
+                                                },
+                                                "employee_id": {
+                                                    "type": "integer",
+                                                    "example": "O campo employee id é obrigatório!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/employees/{id}/salaries/{salaryId}": {
+            "delete": {
+                "tags": [
+                    "Histórico de Salários do Funcionário"
+                ],
+                "summary": "Deletar Salário do Histórico do Funcionário",
+                "description": "Deleta um salário do histórico do funcionário",
+                "operationId": "710b19f29cbfe2b7a8cdf225cf34ec4f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do funcionário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    },
+                    {
+                        "name": "salaryId",
+                        "in": "path",
+                        "description": "id do salário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Listar Usuários",
+                "description": "Retorna a listagem de usuários",
+                "operationId": "5a61fd217e7500976e1ae5c5662a4903",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Criar Usuário",
+                "description": "Cria um novo usuário",
+                "operationId": "65d0a1caf21e84c53fa0f2b8271f26c6",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email do usuário",
+                                        "type": "string",
+                                        "example": "email@example.com.br"
+                                    },
+                                    "username": {
+                                        "description": "Username do usuário",
+                                        "type": "string",
+                                        "example": "gui123"
+                                    },
+                                    "password": {
+                                        "description": "Senha do usuário",
+                                        "type": "string",
+                                        "example": "secret"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Confirmação da senha do usuário",
+                                        "type": "string",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "properties": {
+                                                "username": {
+                                                    "type": "string",
+                                                    "example": "O campo username é obrigatório!"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "O campo Email é obrigatório!"
+                                                },
+                                                "password": {
+                                                    "type": "string",
+                                                    "example": "O campo Senha é obrigatório!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Obter Usuário",
+                "description": "Retorna a usuário pelo id",
+                "operationId": "ff5f10a2275aa6fe96d9a0ef05a069ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Atualizar Usuário",
+                "description": "Atualiza um usuário existente",
+                "operationId": "e28d30345d9c7238299ebdbbbbbb3860",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email do usuário",
+                                        "type": "string",
+                                        "example": "email@example.com.br"
+                                    },
+                                    "username": {
+                                        "description": "Username do usuário",
+                                        "type": "string",
+                                        "example": "gui123"
+                                    },
+                                    "password": {
+                                        "description": "Senha do usuário",
+                                        "type": "string",
+                                        "example": "secret"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Confirmação da senha do usuário",
+                                        "type": "string",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "properties": {
+                                                "username": {
+                                                    "type": "string",
+                                                    "example": "O campo username é obrigatório!"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "O campo Email é obrigatório!"
+                                                },
+                                                "password": {
+                                                    "type": "string",
+                                                    "example": "O campo Senha é obrigatório!"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Usuários"
+                ],
+                "summary": "Deletar Usuário",
+                "description": "Deleta um usuário existente",
+                "operationId": "f1c4cdc294934242a4db00662a78305a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Model not found!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Unauthenticated. It's necessary to be authenticated to access this endpoint"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization Header": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Address": {
+                "title": "Address",
+                "description": "Classe Endereço",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "place": {
+                        "type": "string",
+                        "example": "Rua Maldonado"
+                    },
+                    "number": {
+                        "type": "string",
+                        "example": "694"
+                    },
+                    "city": {
+                        "type": "string",
+                        "example": "Dourados"
+                    },
+                    "state": {
+                        "type": "string",
+                        "example": "MT"
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "example": "67500-425"
+                    },
+                    "employee_id": {
+                        "type": "integer",
+                        "example": "2"
+                    },
+                    "created_at": {
+                        "type": "datetime",
+                        "example": "25/09/2021 23:43:47"
+                    },
+                    "updated_at": {
+                        "type": "datetime",
+                        "example": "25/09/2021 23:43:47"
+                    }
+                },
+                "type": "object"
+            },
+            "Employee": {
+                "title": "Employee",
+                "description": "Classe Funcionário",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Alexandre da Silva"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "123.456-78"
+                    },
+                    "rg": {
+                        "type": "string",
+                        "example": "22.289.456-7"
+                    },
+                    "birth": {
+                        "type": "datetime",
+                        "example": "1981-09-16"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "teste@example.com"
+                    },
+                    "currentSalary": {
+                        "properties": {
+                            "salary": {
+                                "type": "number",
+                                "example": "R$ 7.702,79"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    }
+                },
+                "type": "object"
+            },
+            "EmployeeSalaryHistoric": {
+                "title": "EmployeeSalaryHistoric",
+                "description": "Classe Histórico de Salários do Funcionário",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "salary": {
+                        "type": "number",
+                        "example": "4834.45"
+                    },
+                    "employee_id": {
+                        "type": "integer",
+                        "example": "2"
+                    },
+                    "created_at": {
+                        "type": "datetime",
+                        "example": "25/09/2021 23:43:47"
+                    },
+                    "updated_at": {
+                        "type": "datetime",
+                        "example": "25/09/2021 23:43:47"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "Classe Usuário",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "teste"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "teste@example.com"
+                    },
+                    "email_verified_at": {
+                        "type": "datetime",
+                        "example": "2021-09-16T14:34:11.000000Z"
+                    },
+                    "created_at": {
+                        "type": "datetime",
+                        "example": "2021-09-16T14:34:11.000000Z"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Authorization Header": {
+                "type": "http",
+                "description": "Token de acesso JWT retornado após feito o login. Example: 'Authorization: Bearer {token}'",
+                "name": "Authorization",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     },
