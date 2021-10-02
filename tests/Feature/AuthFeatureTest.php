@@ -112,7 +112,7 @@ class AuthFeatureTest extends TestCase
 
     public function test_it_can_return_logged_user()
     {
-        $response = $this->postJson('/api/v1/auth/me', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->getJson('/api/v1/auth/me', ['Authorization' => 'Bearer ' . $this->token]);
 
         $response
             ->assertOk()
@@ -125,7 +125,7 @@ class AuthFeatureTest extends TestCase
 
     public function test_it_cant_return_logged_user_without_authorization_bearer()
     {
-        $response = $this->postJson('/api/v1/auth/me', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->getJson('/api/v1/auth/me', ['Authorization' => 'Bearer ' . $this->token]);
 
         $response
             ->assertOk()
