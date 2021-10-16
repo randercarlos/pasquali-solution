@@ -31,6 +31,10 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Run PHP-CS-Fixer
+      run: composer sniff
+    - name: Analyzing potentials bugs or errors
+      run: composer analyse
 
   laravel-cd:
     name: Continuous Deployment
