@@ -13,3 +13,4 @@ yarn-error.log
 /.idea
 /.eclipse
 /storage/docker/mysql
+.php-cs-fixer.cache
