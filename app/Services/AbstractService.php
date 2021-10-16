@@ -79,7 +79,7 @@ abstract class AbstractService
         }
 
         if (!$model->delete()) {
-            throw new \Exception("Fail on delete {$class} with id {$model->id}");
+            throw new \Exception("Fail on delete {$class}");
         }
 
         return $model;

@@ -81,7 +81,5 @@ TEXT;
         } else {
             return response()->fail($exception->getMessage(), 500);
         }
-
-        return parent::render($request, $exception);
     }
 }
