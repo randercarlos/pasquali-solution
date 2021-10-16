@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
- * Class User
+ * Class User.
  *
  * @OA\Schema(
  *     schema="User",
@@ -26,17 +25,21 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     protected $table = 'users';
+
     protected $fillable = [
         'username', 'email', 'password',
     ];
+
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function employee() {
+    public function employee()
+    {
         return $this->hasOne(Employee::class);
     }
 
@@ -49,5 +52,4 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
 }

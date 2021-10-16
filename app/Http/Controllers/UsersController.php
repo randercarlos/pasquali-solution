@@ -11,7 +11,8 @@ class UsersController extends Controller
 {
     private $usersService;
 
-    public function __construct(UsersService $usersService) {
+    public function __construct(UsersService $usersService)
+    {
         $this->usersService = $usersService;
     }
 
@@ -185,7 +186,6 @@ class UsersController extends Controller
         return response()->success($this->usersService->save($request->validated()), 201);
     }
 
-
     /**
      * @OA\Put(
      *     tags={"Usuários"},
@@ -277,7 +277,6 @@ class UsersController extends Controller
         return response()->success($this->usersService->save($request->validated(), $user));
     }
 
-
     /**
      * @OA\Delete(
      *     tags={"Usuários"},
@@ -331,5 +330,4 @@ class UsersController extends Controller
     {
         return response()->success($this->usersService->delete($id), 204);
     }
-
 }

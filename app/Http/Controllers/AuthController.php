@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class AuthController extends Controller
 {
     private $authService;
 
-    public function __construct(AuthService $authService) {
+    public function __construct(AuthService $authService)
+    {
         $this->authService = $authService;
     }
 
@@ -105,7 +105,6 @@ class AuthController extends Controller
         return response()->success($this->authService->me());
     }
 
-
     /**
      * @OA\Post(
      *     tags={"Autenticação"},
@@ -148,7 +147,6 @@ class AuthController extends Controller
     {
         return response()->success($this->authService->refreshToken());
     }
-
 
     /**
      * @OA\Post(

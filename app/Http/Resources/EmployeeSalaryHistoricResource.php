@@ -15,7 +15,7 @@ class EmployeeSalaryHistoricResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'salary' => (new \NumberFormatter('pt_BR', \NumberFormatter::CURRENCY))->formatCurrency($this->salary, 'BRL')
+            'salary' => (new \NumberFormatter('pt_BR', \NumberFormatter::CURRENCY))->formatCurrency($this->salary, 'BRL'),
         ];
     }
 }

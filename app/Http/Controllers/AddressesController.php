@@ -12,7 +12,8 @@ class AddressesController extends Controller
 {
     private $addressesService;
 
-    public function __construct(AddressesService $addressesService) {
+    public function __construct(AddressesService $addressesService)
+    {
         $this->addressesService = $addressesService;
     }
 
@@ -212,7 +213,6 @@ class AddressesController extends Controller
         return response()->success($this->addressesService->save($request->validated()), 201);
     }
 
-
     /**
      * @OA\Put(
      *     tags={"Endereços do Funcionário"},
@@ -321,7 +321,6 @@ class AddressesController extends Controller
         return response()->success($this->addressesService->save($request->validated(), $address));
     }
 
-
     /**
      * @OA\Delete(
      *     tags={"Endereços do Funcionário"},
@@ -386,5 +385,4 @@ class AddressesController extends Controller
     {
         return response()->success($this->addressesService->delete($id), 204);
     }
-
 }

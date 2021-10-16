@@ -3,7 +3,6 @@
 use App\Models\Employee;
 use Faker\Generator as Faker;
 use Illuminate\Support\Arr;
-use App\Models\User;
 
 $factory->define(Employee::class, function (Faker $faker) {
     return [
@@ -12,6 +11,6 @@ $factory->define(Employee::class, function (Faker $faker) {
         'cpf' => $faker->cpf,
         'rg' => $faker->rg,
         'email' => $faker->email,
-        'user_id' => $faker->unique()->numberBetween(1, 5)
+        'user_id' => $faker->unique()->numberBetween(1, 5),
     ];
 });

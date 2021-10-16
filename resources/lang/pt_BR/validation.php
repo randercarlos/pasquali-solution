@@ -104,7 +104,7 @@ return [
         'photo.dimensions' => 'A foto deve possuir largura e a altura entre :min_widthpx(min.) e :max_widthpx(máx.)',
         'name' => [
             'unique' => 'O nome ":input" já está cadastrado e não pode ser repetido!',
-        ]
+        ],
     ],
 
     /*

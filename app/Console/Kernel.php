@@ -2,12 +2,8 @@
 
 namespace App\Console;
 
-use App\Mail\SalesInformation;
-use App\Services\OrderService;
-use App\Services\ReportService;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,10 +24,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            Mail::to(env('MAIL_TO_ADDRESS', 'teste-fefaf7@inbox.mailtrap.io'))
-                ->send(new SalesInformation(new ReportService(), new OrderService()));
-        })->weekly()->fridays()->at('20:00')->timezone('America/Sao_Paulo');
     }
 
     /**

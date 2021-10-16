@@ -11,7 +11,8 @@ class EmployeesSalariesHistoricController extends Controller
 {
     private $employeesSalariesHistoricService;
 
-    public function __construct(EmployeesSalariesHistoricService $employeesSalariesHistoricService) {
+    public function __construct(EmployeesSalariesHistoricService $employeesSalariesHistoricService)
+    {
         $this->employeesSalariesHistoricService = $employeesSalariesHistoricService;
     }
 
@@ -131,7 +132,6 @@ class EmployeesSalariesHistoricController extends Controller
         return response()->success($this->employeesSalariesHistoricService->save($request->validated()), 201);
     }
 
-
     /**
      * @OA\Delete(
      *     tags={"Histórico de Salários do Funcionário"},
@@ -196,5 +196,4 @@ class EmployeesSalariesHistoricController extends Controller
     {
         return response()->success($this->employeesSalariesHistoricService->delete($id), 204);
     }
-
 }

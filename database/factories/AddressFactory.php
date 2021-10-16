@@ -13,6 +13,6 @@ $factory->define(Address::class, function (Faker $faker) {
         'city' =>  $faker->city,
         'state' =>  $faker->stateAbbr,
         'postalCode' => $faker->postcode,
-        'employee_id' => $i++
+        'employee_id' => $i++,
     ];
 });

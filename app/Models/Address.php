@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Address
+ * Class Address.
  *
  * @OA\Schema(
  *     schema="Address",
@@ -26,7 +26,8 @@ class Address extends Model
 {
     protected $fillable = ['place', 'number', 'city', 'state', 'postalCode', 'employee_id'];
 
-    public function employee() {
+    public function employee()
+    {
         return $this->belongsTo(Employee::class);
     }
 

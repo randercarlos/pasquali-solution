@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthFeatureTest extends TestCase
@@ -40,7 +40,7 @@ class AuthFeatureTest extends TestCase
 
         $response = $this->postJson('/api/v1/auth/login', [
             'email' => 'admin@admin.com',
-            'password' => 'admin'
+            'password' => 'admin',
         ]);
 
         $this->assertAuthenticated();
@@ -49,10 +49,9 @@ class AuthFeatureTest extends TestCase
             ->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    'access_token', 'token_type', 'expires_in'
-                ]
+                    'access_token', 'token_type', 'expires_in',
+                ],
             ]);
-
     }
 
     public function test_it_cant_authenticate_with_invalid_email_or_password()
@@ -61,24 +60,23 @@ class AuthFeatureTest extends TestCase
 
         $response = $this->postJson('/api/v1/auth/login', [
             'email' => 'testando@testando.com',
-            'password' => 'não_existe'
+            'password' => 'não_existe',
         ]);
 
         $response->assertStatus(401);
     }
 
-
     public function test_it_can_logout()
     {
-        $response = $this->postJson('/api/v1/auth/logout', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->postJson('/api/v1/auth/logout', [], ['Authorization' => 'Bearer '.$this->token]);
 
         $response
             ->dump()
             ->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    'msg'
-                ]
+                    'msg',
+                ],
             ]);
     }
 
@@ -91,17 +89,16 @@ class AuthFeatureTest extends TestCase
 
     public function test_it_can_refresh_token()
     {
-        $response = $this->postJson('/api/v1/auth/refresh-token', [], ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->postJson('/api/v1/auth/refresh-token', [], ['Authorization' => 'Bearer '.$this->token]);
 
         $response
             ->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    'access_token', 'token_type', 'expires_in'
-                ]
+                    'access_token', 'token_type', 'expires_in',
+                ],
             ]);
     }
-
 
     public function test_it_cant_refresh_token_without_authorization_bearer()
     {
@@ -112,36 +109,37 @@ class AuthFeatureTest extends TestCase
 
     public function test_it_can_return_logged_user()
     {
-        $response = $this->getJson('/api/v1/auth/me', ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->getJson('/api/v1/auth/me', ['Authorization' => 'Bearer '.$this->token]);
 
         $response
             ->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at'
-                ]
+                    'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at',
+                ],
             ]);
     }
 
     public function test_it_cant_return_logged_user_without_authorization_bearer()
     {
-        $response = $this->getJson('/api/v1/auth/me', ['Authorization' => 'Bearer ' . $this->token]);
+        $response = $this->getJson('/api/v1/auth/me', ['Authorization' => 'Bearer '.$this->token]);
 
         $response
             ->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at'
-                ]
+                    'id', 'username', 'email', 'email_verified_at', 'created_at', 'updated_at',
+                ],
             ]);
     }
 
-    private function createUser() {
+    private function createUser()
+    {
         // create a user
         User::create([
             'username' => 'admin',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('admin')
+            'password' => Hash::make('admin'),
         ]);
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Enums;
 
-class JobStatus {
-    const OPEN = 'open';
-    const PROGRESS = 'progress';
-    const CLOSE = 'close';
+class JobStatus
+{
+    public const OPEN = 'open';
+
+    public const PROGRESS = 'progress';
+
+    public const CLOSE = 'close';
 }
