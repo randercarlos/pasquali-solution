@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
- * Class Employee
+ * Class Employee.
  *
  * @OA\Schema(
  *     schema="Employee",
@@ -27,26 +26,32 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     protected $table = 'employees';
+
     protected $fillable = [
-        'name', 'cpf', 'rg', 'birth', 'email', 'user_id'
+        'name', 'cpf', 'rg', 'birth', 'email', 'user_id',
     ];
+
     protected $casts = [
         'birth' => 'date',
     ];
 
-    public function address() {
+    public function address()
+    {
         return $this->hasOne(Address::class);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function salariesHistory() {
+    public function salariesHistory()
+    {
         return $this->hasMany(EmployeeSalaryHistoric::class);
     }
 
-    public function currentSalary() {
+    public function currentSalary()
+    {
         return $this->hasOne(EmployeeSalaryHistoric::class)->latest();
     }
 
@@ -54,5 +59,4 @@ class Employee extends Model
     {
         return $date->format('d/m/Y H:i:s');
     }
-
 }

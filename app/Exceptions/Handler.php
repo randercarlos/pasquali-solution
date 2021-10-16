@@ -50,17 +50,13 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof AuthenticationException) {
             return response()->fail('Unauthenticated. It\'s necessary to be authenticated to access this endpoint', 401);
-
-        } else if ($exception instanceof UnauthorizedException) {
+        } elseif ($exception instanceof UnauthorizedException) {
             return response()->fail($exception->getMessage() ?? "This user doesn't have permission to perform this action.", 403);
-
-        } else if ($exception instanceof ValidationException) {
+        } elseif ($exception instanceof ValidationException) {
             return response()->fail($exception->errors(), 422);
-
-        } else if ($exception instanceof ModelNotFoundException) {
+        } elseif ($exception instanceof ModelNotFoundException) {
             return response()->fail('Model not found!', 404);
-
-        } else if ($exception instanceof QueryException) {
+        } elseif ($exception instanceof QueryException) {
             if ($exception->errorInfo[1] === 1062) {
                 return response()->fail('A record already exists with this field and can\'t be duplicate!', 422);
             }

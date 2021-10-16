@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\EmployeeSalaryHistoric;
+use Illuminate\Database\Seeder;
 
 class EmployeeSalaryHistoricSeeder extends Seeder
 {

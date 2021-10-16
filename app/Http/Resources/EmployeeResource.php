@@ -22,7 +22,7 @@ class EmployeeResource extends JsonResource
             'birthday' => $this->birth->format('d/m/Y'),
             'email' => $this->email,
             'currentSalary' => new EmployeeSalaryHistoricResource($this->currentSalary),
-            'address' => new AddressResource($this->address)
+            'address' => new AddressResource($this->address),
         ];
     }
 }

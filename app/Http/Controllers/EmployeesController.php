@@ -11,7 +11,8 @@ class EmployeesController extends Controller
 {
     private $employeesService;
 
-    public function __construct(EmployeesService $employeesService) {
+    public function __construct(EmployeesService $employeesService)
+    {
         $this->employeesService = $employeesService;
     }
 
@@ -54,7 +55,6 @@ class EmployeesController extends Controller
     {
         return response()->success(EmployeeResource::collection($this->employeesService->getAll()));
     }
-
 
     /**
      * @OA\Get(
@@ -116,7 +116,6 @@ class EmployeesController extends Controller
     {
         return response()->success(new EmployeeResource($this->employeesService->find($id)));
     }
-
 
     /**
      * @OA\Post(
@@ -188,7 +187,6 @@ class EmployeesController extends Controller
     {
         return response()->success($this->employeesService->save($request->validated()), 201);
     }
-
 
     /**
      * @OA\Put(
@@ -285,7 +283,6 @@ class EmployeesController extends Controller
         return response()->success($this->employeesService->save($request->validated(), $employee));
     }
 
-
     /**
      * @OA\Delete(
      *     tags={"Funcionários"},
@@ -339,5 +336,4 @@ class EmployeesController extends Controller
     {
         return response()->success($this->employeesService->delete($id), 204);
     }
-
 }

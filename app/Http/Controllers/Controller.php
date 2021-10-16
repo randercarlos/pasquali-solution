@@ -8,7 +8,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- *
  * @OA\OpenApi(
  *   @OA\Server(
  *      url="http://localhost:8000/api/v1",
@@ -40,7 +39,6 @@ use Illuminate\Routing\Controller as BaseController;
  *       bearerFormat="JWT",
  *       securityScheme="Authorization Header",
  *   )
- *
  */
 class Controller extends BaseController
 {
